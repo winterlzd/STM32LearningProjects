@@ -1,0 +1,16 @@
+{
+  "C_Cpp.default.compileCommands": "${workspaceFolder}/compile_commands.json",
+  "C_Cpp.default.includePath": [
+    "${workspaceFolder}/Inc/**",
+    "${workspaceFolder}/Drivers/**"
+  ],
+  "C_Cpp.default.defines": [
+    "USE_HAL_DRIVER",
+    "STM32F103xB"
+  ],
+  "clangd.arguments": [
+    "--compile-commands-dir=${workspaceFolder}",
+    "--query-driver=/opt/homebrew/bin/arm-none-eabi-gcc,/Applications/ArmGNUToolchain/**/arm-none-eabi-gcc",
+    "--background-index"
+  ]
+}

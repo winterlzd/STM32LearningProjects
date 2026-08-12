@@ -1,0 +1,18 @@
+CompileFlags:
+  CompilationDatabase: .
+  Add:
+    - -I/Users/liuzhendong/Documents/STM32Projects/lights/lights/Inc
+    - -I/Users/liuzhendong/Documents/STM32Projects/lights/lights/Drivers/STM32F1xx_HAL_Driver/Inc
+    - -I/Users/liuzhendong/Documents/STM32Projects/lights/lights/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy
+    - -I/Users/liuzhendong/Documents/STM32Projects/lights/lights/Drivers/CMSIS/Device/ST/STM32F1xx/Include
+    - -I/Users/liuzhendong/Documents/STM32Projects/lights/lights/Drivers/CMSIS/Include
+    - -DUSE_HAL_DRIVER
+    - -DSTM32F103xB
+    - --target=arm-none-eabi
+  Remove:
+    - -Wa,*
+    - -MMD
+    - -MP
+    - -MF*
+    - -mcpu=*
+    - -mthumb

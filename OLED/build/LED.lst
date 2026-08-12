@@ -1,0 +1,421 @@
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"LED.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.file 1 "Core/Src/LED.c"
+  18              		.section	.text.LED_Init,"ax",%progbits
+  19              		.align	1
+  20              		.global	LED_Init
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  25              	LED_Init:
+  26              	.LFB65:
+   1:Core/Src/LED.c **** #include "main.h"
+   2:Core/Src/LED.c **** #include "LED.h"
+   3:Core/Src/LED.c **** 
+   4:Core/Src/LED.c **** /**
+   5:Core/Src/LED.c ****   * 函    数：LED初始化
+   6:Core/Src/LED.c ****   * 参    数：无
+   7:Core/Src/LED.c ****   * 返 回 值：无
+   8:Core/Src/LED.c ****   */
+   9:Core/Src/LED.c **** void LED_Init(void)
+  10:Core/Src/LED.c **** {
+  27              		.loc 1 10 1 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 24
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 70B5     		push	{r4, r5, r6, lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 16
+  34              		.cfi_offset 4, -16
+  35              		.cfi_offset 5, -12
+  36              		.cfi_offset 6, -8
+  37              		.cfi_offset 14, -4
+  38 0002 86B0     		sub	sp, sp, #24
+  39              	.LCFI1:
+  40              		.cfi_def_cfa_offset 40
+  11:Core/Src/LED.c **** 	__HAL_RCC_GPIOA_CLK_ENABLE();
+  41              		.loc 1 11 2 view .LVU1
+  42              	.LBB2:
+  43              		.loc 1 11 2 view .LVU2
+  44              		.loc 1 11 2 view .LVU3
+  45 0004 104B     		ldr	r3, .L3
+  46 0006 9A69     		ldr	r2, [r3, #24]
+  47 0008 42F00402 		orr	r2, r2, #4
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s 			page 2
+
+
+  48 000c 9A61     		str	r2, [r3, #24]
+  49              		.loc 1 11 2 view .LVU4
+  50 000e 9B69     		ldr	r3, [r3, #24]
+  51 0010 03F00403 		and	r3, r3, #4
+  52 0014 0193     		str	r3, [sp, #4]
+  53              		.loc 1 11 2 view .LVU5
+  54 0016 019B     		ldr	r3, [sp, #4]
+  55              	.LBE2:
+  56              		.loc 1 11 2 view .LVU6
+  12:Core/Src/LED.c **** 	
+  13:Core/Src/LED.c **** 	GPIO_InitTypeDef GPIO_InitStruct = {0};
+  57              		.loc 1 13 2 view .LVU7
+  58              		.loc 1 13 19 is_stmt 0 view .LVU8
+  59 0018 02A9     		add	r1, sp, #8
+  60 001a 0023     		movs	r3, #0
+  61 001c 0293     		str	r3, [sp, #8]
+  62 001e 4B60     		str	r3, [r1, #4]
+  63 0020 8B60     		str	r3, [r1, #8]
+  64 0022 CB60     		str	r3, [r1, #12]
+  14:Core/Src/LED.c **** 	GPIO_InitStruct.Pin = GPIO_PIN_1 | GPIO_PIN_2;
+  65              		.loc 1 14 2 is_stmt 1 view .LVU9
+  66              		.loc 1 14 22 is_stmt 0 view .LVU10
+  67 0024 0625     		movs	r5, #6
+  68 0026 0295     		str	r5, [sp, #8]
+  15:Core/Src/LED.c **** 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  69              		.loc 1 15 2 is_stmt 1 view .LVU11
+  70              		.loc 1 15 23 is_stmt 0 view .LVU12
+  71 0028 0126     		movs	r6, #1
+  72 002a 0396     		str	r6, [sp, #12]
+  16:Core/Src/LED.c **** 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  73              		.loc 1 16 2 is_stmt 1 view .LVU13
+  74              		.loc 1 16 24 is_stmt 0 view .LVU14
+  75 002c 0323     		movs	r3, #3
+  76 002e 0593     		str	r3, [sp, #20]
+  17:Core/Src/LED.c **** 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  77              		.loc 1 17 2 is_stmt 1 view .LVU15
+  78 0030 064C     		ldr	r4, .L3+4
+  79 0032 2046     		mov	r0, r4
+  80 0034 FFF7FEFF 		bl	HAL_GPIO_Init
+  81              	.LVL0:
+  18:Core/Src/LED.c **** 	
+  19:Core/Src/LED.c **** 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1 | GPIO_PIN_2, GPIO_PIN_SET);
+  82              		.loc 1 19 2 view .LVU16
+  83 0038 3246     		mov	r2, r6
+  84 003a 2946     		mov	r1, r5
+  85 003c 2046     		mov	r0, r4
+  86 003e FFF7FEFF 		bl	HAL_GPIO_WritePin
+  87              	.LVL1:
+  20:Core/Src/LED.c **** }
+  88              		.loc 1 20 1 is_stmt 0 view .LVU17
+  89 0042 06B0     		add	sp, sp, #24
+  90              	.LCFI2:
+  91              		.cfi_def_cfa_offset 16
+  92              		@ sp needed
+  93 0044 70BD     		pop	{r4, r5, r6, pc}
+  94              	.L4:
+  95 0046 00BF     		.align	2
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s 			page 3
+
+
+  96              	.L3:
+  97 0048 00100240 		.word	1073876992
+  98 004c 00080140 		.word	1073809408
+  99              		.cfi_endproc
+ 100              	.LFE65:
+ 102              		.section	.text.LED1_ON,"ax",%progbits
+ 103              		.align	1
+ 104              		.global	LED1_ON
+ 105              		.syntax unified
+ 106              		.thumb
+ 107              		.thumb_func
+ 109              	LED1_ON:
+ 110              	.LFB66:
+  21:Core/Src/LED.c **** 
+  22:Core/Src/LED.c **** /**
+  23:Core/Src/LED.c ****   * 函    数：LED1开启
+  24:Core/Src/LED.c ****   * 参    数：无
+  25:Core/Src/LED.c ****   * 返 回 值：无
+  26:Core/Src/LED.c ****   */
+  27:Core/Src/LED.c **** void LED1_ON(void)
+  28:Core/Src/LED.c **** {
+ 111              		.loc 1 28 1 is_stmt 1 view -0
+ 112              		.cfi_startproc
+ 113              		@ args = 0, pretend = 0, frame = 0
+ 114              		@ frame_needed = 0, uses_anonymous_args = 0
+ 115 0000 08B5     		push	{r3, lr}
+ 116              	.LCFI3:
+ 117              		.cfi_def_cfa_offset 8
+ 118              		.cfi_offset 3, -8
+ 119              		.cfi_offset 14, -4
+  29:Core/Src/LED.c **** 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
+ 120              		.loc 1 29 2 view .LVU19
+ 121 0002 0022     		movs	r2, #0
+ 122 0004 0221     		movs	r1, #2
+ 123 0006 0248     		ldr	r0, .L7
+ 124 0008 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 125              	.LVL2:
+  30:Core/Src/LED.c **** }
+ 126              		.loc 1 30 1 is_stmt 0 view .LVU20
+ 127 000c 08BD     		pop	{r3, pc}
+ 128              	.L8:
+ 129 000e 00BF     		.align	2
+ 130              	.L7:
+ 131 0010 00080140 		.word	1073809408
+ 132              		.cfi_endproc
+ 133              	.LFE66:
+ 135              		.section	.text.LED1_OFF,"ax",%progbits
+ 136              		.align	1
+ 137              		.global	LED1_OFF
+ 138              		.syntax unified
+ 139              		.thumb
+ 140              		.thumb_func
+ 142              	LED1_OFF:
+ 143              	.LFB67:
+  31:Core/Src/LED.c **** 
+  32:Core/Src/LED.c **** /**
+  33:Core/Src/LED.c ****   * 函    数：LED1关闭
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s 			page 4
+
+
+  34:Core/Src/LED.c ****   * 参    数：无
+  35:Core/Src/LED.c ****   * 返 回 值：无
+  36:Core/Src/LED.c ****   */
+  37:Core/Src/LED.c **** void LED1_OFF(void)
+  38:Core/Src/LED.c **** {
+ 144              		.loc 1 38 1 is_stmt 1 view -0
+ 145              		.cfi_startproc
+ 146              		@ args = 0, pretend = 0, frame = 0
+ 147              		@ frame_needed = 0, uses_anonymous_args = 0
+ 148 0000 08B5     		push	{r3, lr}
+ 149              	.LCFI4:
+ 150              		.cfi_def_cfa_offset 8
+ 151              		.cfi_offset 3, -8
+ 152              		.cfi_offset 14, -4
+  39:Core/Src/LED.c **** 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
+ 153              		.loc 1 39 2 view .LVU22
+ 154 0002 0122     		movs	r2, #1
+ 155 0004 0221     		movs	r1, #2
+ 156 0006 0248     		ldr	r0, .L11
+ 157 0008 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 158              	.LVL3:
+  40:Core/Src/LED.c **** }
+ 159              		.loc 1 40 1 is_stmt 0 view .LVU23
+ 160 000c 08BD     		pop	{r3, pc}
+ 161              	.L12:
+ 162 000e 00BF     		.align	2
+ 163              	.L11:
+ 164 0010 00080140 		.word	1073809408
+ 165              		.cfi_endproc
+ 166              	.LFE67:
+ 168              		.section	.text.LED1_Turn,"ax",%progbits
+ 169              		.align	1
+ 170              		.global	LED1_Turn
+ 171              		.syntax unified
+ 172              		.thumb
+ 173              		.thumb_func
+ 175              	LED1_Turn:
+ 176              	.LFB68:
+  41:Core/Src/LED.c **** 
+  42:Core/Src/LED.c **** /**
+  43:Core/Src/LED.c ****   * 函    数：LED1状态翻转
+  44:Core/Src/LED.c ****   * 参    数：无
+  45:Core/Src/LED.c ****   * 返 回 值：无
+  46:Core/Src/LED.c ****   */
+  47:Core/Src/LED.c **** void LED1_Turn(void)
+  48:Core/Src/LED.c **** {
+ 177              		.loc 1 48 1 is_stmt 1 view -0
+ 178              		.cfi_startproc
+ 179              		@ args = 0, pretend = 0, frame = 0
+ 180              		@ frame_needed = 0, uses_anonymous_args = 0
+ 181 0000 08B5     		push	{r3, lr}
+ 182              	.LCFI5:
+ 183              		.cfi_def_cfa_offset 8
+ 184              		.cfi_offset 3, -8
+ 185              		.cfi_offset 14, -4
+  49:Core/Src/LED.c **** 	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_1);
+ 186              		.loc 1 49 2 view .LVU25
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s 			page 5
+
+
+ 187 0002 0221     		movs	r1, #2
+ 188 0004 0148     		ldr	r0, .L15
+ 189 0006 FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 190              	.LVL4:
+  50:Core/Src/LED.c **** }
+ 191              		.loc 1 50 1 is_stmt 0 view .LVU26
+ 192 000a 08BD     		pop	{r3, pc}
+ 193              	.L16:
+ 194              		.align	2
+ 195              	.L15:
+ 196 000c 00080140 		.word	1073809408
+ 197              		.cfi_endproc
+ 198              	.LFE68:
+ 200              		.section	.text.LED2_ON,"ax",%progbits
+ 201              		.align	1
+ 202              		.global	LED2_ON
+ 203              		.syntax unified
+ 204              		.thumb
+ 205              		.thumb_func
+ 207              	LED2_ON:
+ 208              	.LFB69:
+  51:Core/Src/LED.c **** 
+  52:Core/Src/LED.c **** /**
+  53:Core/Src/LED.c ****   * 函    数：LED2开启
+  54:Core/Src/LED.c ****   * 参    数：无
+  55:Core/Src/LED.c ****   * 返 回 值：无
+  56:Core/Src/LED.c ****   */
+  57:Core/Src/LED.c **** void LED2_ON(void)
+  58:Core/Src/LED.c **** {
+ 209              		.loc 1 58 1 is_stmt 1 view -0
+ 210              		.cfi_startproc
+ 211              		@ args = 0, pretend = 0, frame = 0
+ 212              		@ frame_needed = 0, uses_anonymous_args = 0
+ 213 0000 08B5     		push	{r3, lr}
+ 214              	.LCFI6:
+ 215              		.cfi_def_cfa_offset 8
+ 216              		.cfi_offset 3, -8
+ 217              		.cfi_offset 14, -4
+  59:Core/Src/LED.c **** 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_RESET);
+ 218              		.loc 1 59 2 view .LVU28
+ 219 0002 0022     		movs	r2, #0
+ 220 0004 0421     		movs	r1, #4
+ 221 0006 0248     		ldr	r0, .L19
+ 222 0008 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 223              	.LVL5:
+  60:Core/Src/LED.c **** }
+ 224              		.loc 1 60 1 is_stmt 0 view .LVU29
+ 225 000c 08BD     		pop	{r3, pc}
+ 226              	.L20:
+ 227 000e 00BF     		.align	2
+ 228              	.L19:
+ 229 0010 00080140 		.word	1073809408
+ 230              		.cfi_endproc
+ 231              	.LFE69:
+ 233              		.section	.text.LED2_OFF,"ax",%progbits
+ 234              		.align	1
+ 235              		.global	LED2_OFF
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s 			page 6
+
+
+ 236              		.syntax unified
+ 237              		.thumb
+ 238              		.thumb_func
+ 240              	LED2_OFF:
+ 241              	.LFB70:
+  61:Core/Src/LED.c **** 
+  62:Core/Src/LED.c **** /**
+  63:Core/Src/LED.c ****   * 函    数：LED2关闭
+  64:Core/Src/LED.c ****   * 参    数：无
+  65:Core/Src/LED.c ****   * 返 回 值：无
+  66:Core/Src/LED.c ****   */
+  67:Core/Src/LED.c **** void LED2_OFF(void)
+  68:Core/Src/LED.c **** {
+ 242              		.loc 1 68 1 is_stmt 1 view -0
+ 243              		.cfi_startproc
+ 244              		@ args = 0, pretend = 0, frame = 0
+ 245              		@ frame_needed = 0, uses_anonymous_args = 0
+ 246 0000 08B5     		push	{r3, lr}
+ 247              	.LCFI7:
+ 248              		.cfi_def_cfa_offset 8
+ 249              		.cfi_offset 3, -8
+ 250              		.cfi_offset 14, -4
+  69:Core/Src/LED.c **** 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_SET);
+ 251              		.loc 1 69 2 view .LVU31
+ 252 0002 0122     		movs	r2, #1
+ 253 0004 0421     		movs	r1, #4
+ 254 0006 0248     		ldr	r0, .L23
+ 255 0008 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 256              	.LVL6:
+  70:Core/Src/LED.c **** }
+ 257              		.loc 1 70 1 is_stmt 0 view .LVU32
+ 258 000c 08BD     		pop	{r3, pc}
+ 259              	.L24:
+ 260 000e 00BF     		.align	2
+ 261              	.L23:
+ 262 0010 00080140 		.word	1073809408
+ 263              		.cfi_endproc
+ 264              	.LFE70:
+ 266              		.section	.text.LED2_Turn,"ax",%progbits
+ 267              		.align	1
+ 268              		.global	LED2_Turn
+ 269              		.syntax unified
+ 270              		.thumb
+ 271              		.thumb_func
+ 273              	LED2_Turn:
+ 274              	.LFB71:
+  71:Core/Src/LED.c **** 
+  72:Core/Src/LED.c **** /**
+  73:Core/Src/LED.c ****   * 函    数：LED2状态翻转
+  74:Core/Src/LED.c ****   * 参    数：无
+  75:Core/Src/LED.c ****   * 返 回 值：无
+  76:Core/Src/LED.c ****   */
+  77:Core/Src/LED.c **** void LED2_Turn(void)
+  78:Core/Src/LED.c **** {
+ 275              		.loc 1 78 1 is_stmt 1 view -0
+ 276              		.cfi_startproc
+ 277              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s 			page 7
+
+
+ 278              		@ frame_needed = 0, uses_anonymous_args = 0
+ 279 0000 08B5     		push	{r3, lr}
+ 280              	.LCFI8:
+ 281              		.cfi_def_cfa_offset 8
+ 282              		.cfi_offset 3, -8
+ 283              		.cfi_offset 14, -4
+  79:Core/Src/LED.c **** 	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_2);
+ 284              		.loc 1 79 2 view .LVU34
+ 285 0002 0421     		movs	r1, #4
+ 286 0004 0148     		ldr	r0, .L27
+ 287 0006 FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 288              	.LVL7:
+  80:Core/Src/LED.c **** }
+ 289              		.loc 1 80 1 is_stmt 0 view .LVU35
+ 290 000a 08BD     		pop	{r3, pc}
+ 291              	.L28:
+ 292              		.align	2
+ 293              	.L27:
+ 294 000c 00080140 		.word	1073809408
+ 295              		.cfi_endproc
+ 296              	.LFE71:
+ 298              		.text
+ 299              	.Letext0:
+ 300              		.file 2 "/Applications/ArmGNUToolchain/15.3.rel1/arm-none-eabi/arm-none-eabi/include/machine/_defa
+ 301              		.file 3 "/Applications/ArmGNUToolchain/15.3.rel1/arm-none-eabi/arm-none-eabi/include/sys/_stdint.h
+ 302              		.file 4 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 303              		.file 5 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 LED.c
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s:19     .text.LED_Init:00000000 $t
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s:25     .text.LED_Init:00000000 LED_Init
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s:97     .text.LED_Init:00000048 $d
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s:103    .text.LED1_ON:00000000 $t
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s:109    .text.LED1_ON:00000000 LED1_ON
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s:131    .text.LED1_ON:00000010 $d
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s:136    .text.LED1_OFF:00000000 $t
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s:142    .text.LED1_OFF:00000000 LED1_OFF
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s:164    .text.LED1_OFF:00000010 $d
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s:169    .text.LED1_Turn:00000000 $t
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s:175    .text.LED1_Turn:00000000 LED1_Turn
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s:196    .text.LED1_Turn:0000000c $d
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s:201    .text.LED2_ON:00000000 $t
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s:207    .text.LED2_ON:00000000 LED2_ON
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s:229    .text.LED2_ON:00000010 $d
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s:234    .text.LED2_OFF:00000000 $t
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s:240    .text.LED2_OFF:00000000 LED2_OFF
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s:262    .text.LED2_OFF:00000010 $d
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s:267    .text.LED2_Turn:00000000 $t
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s:273    .text.LED2_Turn:00000000 LED2_Turn
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc4ysyQC.s:294    .text.LED2_Turn:0000000c $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_Init
+HAL_GPIO_WritePin
+HAL_GPIO_TogglePin
