@@ -1,0 +1,703 @@
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"driver_max7219_basic.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.file 1 "Core/Src/driver_max7219_basic.c"
+  18              		.section	.rodata.max7219_basic_init.str1.4,"aMS",%progbits,1
+  19              		.align	2
+  20              	.LC0:
+  21 0000 6D617837 		.ascii	"max7219: init failed.\012\000"
+  21      3231393A 
+  21      20696E69 
+  21      74206661 
+  21      696C6564 
+  22 0017 00       		.align	2
+  23              	.LC1:
+  24 0018 6D617837 		.ascii	"max7219: set decode failed.\012\000"
+  24      3231393A 
+  24      20736574 
+  24      20646563 
+  24      6F646520 
+  25 0035 000000   		.align	2
+  26              	.LC2:
+  27 0038 6D617837 		.ascii	"max7219: set mode failed.\012\000"
+  27      3231393A 
+  27      20736574 
+  27      206D6F64 
+  27      65206661 
+  28 0053 00       		.align	2
+  29              	.LC3:
+  30 0054 6D617837 		.ascii	"max7219: set display test mode failed.\012\000"
+  30      3231393A 
+  30      20736574 
+  30      20646973 
+  30      706C6179 
+  31              		.align	2
+  32              	.LC4:
+  33 007c 6D617837 		.ascii	"max7219: set intensity failed.\012\000"
+  33      3231393A 
+  33      20736574 
+  33      20696E74 
+  33      656E7369 
+  34              		.align	2
+  35              	.LC5:
+  36 009c 6D617837 		.ascii	"max7219: set scan limit failed.\012\000"
+  36      3231393A 
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s 			page 2
+
+
+  36      20736574 
+  36      20736361 
+  36      6E206C69 
+  37              		.section	.text.max7219_basic_init,"ax",%progbits
+  38              		.align	1
+  39              		.global	max7219_basic_init
+  40              		.syntax unified
+  41              		.thumb
+  42              		.thumb_func
+  44              	max7219_basic_init:
+  45              	.LFB3:
+   1:Core/Src/driver_max7219_basic.c **** /**
+   2:Core/Src/driver_max7219_basic.c ****  * Copyright (c) 2015 - present LibDriver All rights reserved
+   3:Core/Src/driver_max7219_basic.c ****  * 
+   4:Core/Src/driver_max7219_basic.c ****  * The MIT License (MIT)
+   5:Core/Src/driver_max7219_basic.c ****  *
+   6:Core/Src/driver_max7219_basic.c ****  * Permission is hereby granted, free of charge, to any person obtaining a copy
+   7:Core/Src/driver_max7219_basic.c ****  * of this software and associated documentation files (the "Software"), to deal
+   8:Core/Src/driver_max7219_basic.c ****  * in the Software without restriction, including without limitation the rights
+   9:Core/Src/driver_max7219_basic.c ****  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  10:Core/Src/driver_max7219_basic.c ****  * copies of the Software, and to permit persons to whom the Software is
+  11:Core/Src/driver_max7219_basic.c ****  * furnished to do so, subject to the following conditions:
+  12:Core/Src/driver_max7219_basic.c ****  *
+  13:Core/Src/driver_max7219_basic.c ****  * The above copyright notice and this permission notice shall be included in all
+  14:Core/Src/driver_max7219_basic.c ****  * copies or substantial portions of the Software.
+  15:Core/Src/driver_max7219_basic.c ****  *
+  16:Core/Src/driver_max7219_basic.c ****  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  17:Core/Src/driver_max7219_basic.c ****  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  18:Core/Src/driver_max7219_basic.c ****  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  19:Core/Src/driver_max7219_basic.c ****  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  20:Core/Src/driver_max7219_basic.c ****  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  21:Core/Src/driver_max7219_basic.c ****  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  22:Core/Src/driver_max7219_basic.c ****  * SOFTWARE. 
+  23:Core/Src/driver_max7219_basic.c ****  *
+  24:Core/Src/driver_max7219_basic.c ****  * @file      driver_max7219_basic.c
+  25:Core/Src/driver_max7219_basic.c ****  * @brief     driver max7219 basic source file
+  26:Core/Src/driver_max7219_basic.c ****  * @version   2.0.0
+  27:Core/Src/driver_max7219_basic.c ****  * @author    Shifeng Li
+  28:Core/Src/driver_max7219_basic.c ****  * @date      2021-03-22
+  29:Core/Src/driver_max7219_basic.c ****  *
+  30:Core/Src/driver_max7219_basic.c ****  * <h3>history</h3>
+  31:Core/Src/driver_max7219_basic.c ****  * <table>
+  32:Core/Src/driver_max7219_basic.c ****  * <tr><th>Date        <th>Version  <th>Author      <th>Description
+  33:Core/Src/driver_max7219_basic.c ****  * <tr><td>2021/03/22  <td>2.0      <td>Shifeng Li  <td>format the code
+  34:Core/Src/driver_max7219_basic.c ****  * <tr><td>2020/12/05  <td>1.0      <td>Shifeng Li  <td>first upload
+  35:Core/Src/driver_max7219_basic.c ****  * </table>
+  36:Core/Src/driver_max7219_basic.c ****  */
+  37:Core/Src/driver_max7219_basic.c **** 
+  38:Core/Src/driver_max7219_basic.c **** #include "driver_max7219_basic.h"
+  39:Core/Src/driver_max7219_basic.c **** 
+  40:Core/Src/driver_max7219_basic.c **** static max7219_handle_t gs_handle;        /**< max7219 handle */
+  41:Core/Src/driver_max7219_basic.c **** 
+  42:Core/Src/driver_max7219_basic.c **** /**
+  43:Core/Src/driver_max7219_basic.c ****  * @brief  basic example init
+  44:Core/Src/driver_max7219_basic.c ****  * @return status code
+  45:Core/Src/driver_max7219_basic.c ****  *         - 0 success
+  46:Core/Src/driver_max7219_basic.c ****  *         - 1 init failed
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s 			page 3
+
+
+  47:Core/Src/driver_max7219_basic.c ****  * @note   none
+  48:Core/Src/driver_max7219_basic.c ****  */
+  49:Core/Src/driver_max7219_basic.c **** uint8_t max7219_basic_init(void)
+  50:Core/Src/driver_max7219_basic.c **** {
+  46              		.loc 1 50 1 view -0
+  47              		.cfi_startproc
+  48              		@ args = 0, pretend = 0, frame = 0
+  49              		@ frame_needed = 0, uses_anonymous_args = 0
+  50 0000 10B5     		push	{r4, lr}
+  51              	.LCFI0:
+  52              		.cfi_def_cfa_offset 8
+  53              		.cfi_offset 4, -8
+  54              		.cfi_offset 14, -4
+  51:Core/Src/driver_max7219_basic.c ****     uint8_t res; 
+  55              		.loc 1 51 5 view .LVU1
+  52:Core/Src/driver_max7219_basic.c ****     
+  53:Core/Src/driver_max7219_basic.c ****     /* link functions */
+  54:Core/Src/driver_max7219_basic.c ****     DRIVER_MAX7219_LINK_INIT(&gs_handle, max7219_handle_t);
+  56              		.loc 1 54 5 view .LVU2
+  57 0002 2E4C     		ldr	r4, .L14
+  58 0004 4FF48E72 		mov	r2, #284
+  59 0008 0021     		movs	r1, #0
+  60 000a 2046     		mov	r0, r4
+  61 000c FFF7FEFF 		bl	memset
+  62              	.LVL0:
+  55:Core/Src/driver_max7219_basic.c ****     DRIVER_MAX7219_LINK_SPI_INIT(&gs_handle, max7219_interface_spi_init);
+  63              		.loc 1 55 5 view .LVU3
+  64 0010 2B4B     		ldr	r3, .L14+4
+  65 0012 2360     		str	r3, [r4]
+  56:Core/Src/driver_max7219_basic.c ****     DRIVER_MAX7219_LINK_SPI_DEINIT(&gs_handle, max7219_interface_spi_deinit);
+  66              		.loc 1 56 5 view .LVU4
+  67 0014 2B4B     		ldr	r3, .L14+8
+  68 0016 6360     		str	r3, [r4, #4]
+  57:Core/Src/driver_max7219_basic.c ****     DRIVER_MAX7219_LINK_SPI_WRITE_COMMAND(&gs_handle, max7219_interface_spi_write_cmd);
+  69              		.loc 1 57 5 view .LVU5
+  70 0018 2B4B     		ldr	r3, .L14+12
+  71 001a A360     		str	r3, [r4, #8]
+  58:Core/Src/driver_max7219_basic.c ****     DRIVER_MAX7219_LINK_SPI_WRITE(&gs_handle, max7219_interface_spi_write);
+  72              		.loc 1 58 5 view .LVU6
+  73 001c 2B4B     		ldr	r3, .L14+16
+  74 001e E360     		str	r3, [r4, #12]
+  59:Core/Src/driver_max7219_basic.c ****     DRIVER_MAX7219_LINK_DELAY_MS(&gs_handle, max7219_interface_delay_ms);
+  75              		.loc 1 59 5 view .LVU7
+  76 0020 2B4B     		ldr	r3, .L14+20
+  77 0022 2361     		str	r3, [r4, #16]
+  60:Core/Src/driver_max7219_basic.c ****     DRIVER_MAX7219_LINK_DEBUG_PRINT(&gs_handle, max7219_interface_debug_print);
+  78              		.loc 1 60 5 view .LVU8
+  79 0024 2B4B     		ldr	r3, .L14+24
+  80 0026 6361     		str	r3, [r4, #20]
+  61:Core/Src/driver_max7219_basic.c ****     
+  62:Core/Src/driver_max7219_basic.c ****     /* max7219 init */
+  63:Core/Src/driver_max7219_basic.c ****     res = max7219_init(&gs_handle);
+  81              		.loc 1 63 5 view .LVU9
+  82              		.loc 1 63 11 is_stmt 0 view .LVU10
+  83 0028 2046     		mov	r0, r4
+  84 002a FFF7FEFF 		bl	max7219_init
+  85              	.LVL1:
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s 			page 4
+
+
+  64:Core/Src/driver_max7219_basic.c ****     if (res != 0)
+  86              		.loc 1 64 5 is_stmt 1 view .LVU11
+  87              		.loc 1 64 8 is_stmt 0 view .LVU12
+  88 002e 00BB     		cbnz	r0, .L9
+  65:Core/Src/driver_max7219_basic.c ****     {
+  66:Core/Src/driver_max7219_basic.c ****         max7219_interface_debug_print("max7219: init failed.\n");
+  67:Core/Src/driver_max7219_basic.c ****         
+  68:Core/Src/driver_max7219_basic.c ****         return 1;
+  69:Core/Src/driver_max7219_basic.c ****     }
+  70:Core/Src/driver_max7219_basic.c ****     
+  71:Core/Src/driver_max7219_basic.c ****     /* max7219 set default decode */
+  72:Core/Src/driver_max7219_basic.c ****     res = max7219_set_decode(&gs_handle, MAX7219_BASIC_DEFAULT_DECODE);
+  89              		.loc 1 72 5 is_stmt 1 view .LVU13
+  90              		.loc 1 72 11 is_stmt 0 view .LVU14
+  91 0030 0146     		mov	r1, r0
+  92 0032 2248     		ldr	r0, .L14
+  93              	.LVL2:
+  94              		.loc 1 72 11 view .LVU15
+  95 0034 FFF7FEFF 		bl	max7219_set_decode
+  96              	.LVL3:
+  73:Core/Src/driver_max7219_basic.c ****     if (res != 0)
+  97              		.loc 1 73 5 is_stmt 1 view .LVU16
+  98              		.loc 1 73 8 is_stmt 0 view .LVU17
+  99 0038 00BB     		cbnz	r0, .L10
+  74:Core/Src/driver_max7219_basic.c ****     {
+  75:Core/Src/driver_max7219_basic.c ****         max7219_interface_debug_print("max7219: set decode failed.\n");
+  76:Core/Src/driver_max7219_basic.c ****         (void)max7219_deinit(&gs_handle);
+  77:Core/Src/driver_max7219_basic.c ****         
+  78:Core/Src/driver_max7219_basic.c ****         return 1;
+  79:Core/Src/driver_max7219_basic.c ****     }
+  80:Core/Src/driver_max7219_basic.c ****     
+  81:Core/Src/driver_max7219_basic.c ****     /* max7219 set default mode */
+  82:Core/Src/driver_max7219_basic.c ****     res = max7219_set_mode(&gs_handle, MAX7219_BASIC_DEFAULT_MODE);
+ 100              		.loc 1 82 5 is_stmt 1 view .LVU18
+ 101              		.loc 1 82 11 is_stmt 0 view .LVU19
+ 102 003a 0121     		movs	r1, #1
+ 103 003c 1F48     		ldr	r0, .L14
+ 104              	.LVL4:
+ 105              		.loc 1 82 11 view .LVU20
+ 106 003e FFF7FEFF 		bl	max7219_set_mode
+ 107              	.LVL5:
+  83:Core/Src/driver_max7219_basic.c ****     if (res != 0)
+ 108              		.loc 1 83 5 is_stmt 1 view .LVU21
+ 109              		.loc 1 83 8 is_stmt 0 view .LVU22
+ 110 0042 18BB     		cbnz	r0, .L11
+  84:Core/Src/driver_max7219_basic.c ****     {
+  85:Core/Src/driver_max7219_basic.c ****         max7219_interface_debug_print("max7219: set mode failed.\n");
+  86:Core/Src/driver_max7219_basic.c ****         (void)max7219_deinit(&gs_handle);
+  87:Core/Src/driver_max7219_basic.c ****         
+  88:Core/Src/driver_max7219_basic.c ****         return 1;
+  89:Core/Src/driver_max7219_basic.c ****     }
+  90:Core/Src/driver_max7219_basic.c ****     
+  91:Core/Src/driver_max7219_basic.c ****     /* max7219 set default display test mode */
+  92:Core/Src/driver_max7219_basic.c ****     res = max7219_set_display_test_mode(&gs_handle, MAX7219_BASIC_DEFAULT_TEST_MODE);
+ 111              		.loc 1 92 5 is_stmt 1 view .LVU23
+ 112              		.loc 1 92 11 is_stmt 0 view .LVU24
+ 113 0044 0146     		mov	r1, r0
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s 			page 5
+
+
+ 114 0046 1D48     		ldr	r0, .L14
+ 115              	.LVL6:
+ 116              		.loc 1 92 11 view .LVU25
+ 117 0048 FFF7FEFF 		bl	max7219_set_display_test_mode
+ 118              	.LVL7:
+  93:Core/Src/driver_max7219_basic.c ****     if (res != 0)
+ 119              		.loc 1 93 5 is_stmt 1 view .LVU26
+ 120              		.loc 1 93 8 is_stmt 0 view .LVU27
+ 121 004c 30BB     		cbnz	r0, .L12
+  94:Core/Src/driver_max7219_basic.c ****     {
+  95:Core/Src/driver_max7219_basic.c ****         max7219_interface_debug_print("max7219: set display test mode failed.\n");
+  96:Core/Src/driver_max7219_basic.c ****         (void)max7219_deinit(&gs_handle);
+  97:Core/Src/driver_max7219_basic.c ****         
+  98:Core/Src/driver_max7219_basic.c ****         return 1;
+  99:Core/Src/driver_max7219_basic.c ****     }
+ 100:Core/Src/driver_max7219_basic.c ****     
+ 101:Core/Src/driver_max7219_basic.c ****     /* max7219 set default intensity */
+ 102:Core/Src/driver_max7219_basic.c ****     res = max7219_set_intensity(&gs_handle, MAX7219_BASIC_DEFAULT_INTENSITY);
+ 122              		.loc 1 102 5 is_stmt 1 view .LVU28
+ 123              		.loc 1 102 11 is_stmt 0 view .LVU29
+ 124 004e 0F21     		movs	r1, #15
+ 125 0050 1A48     		ldr	r0, .L14
+ 126              	.LVL8:
+ 127              		.loc 1 102 11 view .LVU30
+ 128 0052 FFF7FEFF 		bl	max7219_set_intensity
+ 129              	.LVL9:
+ 103:Core/Src/driver_max7219_basic.c ****     if (res != 0)
+ 130              		.loc 1 103 5 is_stmt 1 view .LVU31
+ 131              		.loc 1 103 8 is_stmt 0 view .LVU32
+ 132 0056 48BB     		cbnz	r0, .L13
+ 104:Core/Src/driver_max7219_basic.c ****     {
+ 105:Core/Src/driver_max7219_basic.c ****         max7219_interface_debug_print("max7219: set intensity failed.\n");
+ 106:Core/Src/driver_max7219_basic.c ****         (void)max7219_deinit(&gs_handle);
+ 107:Core/Src/driver_max7219_basic.c ****         
+ 108:Core/Src/driver_max7219_basic.c ****         return 1;
+ 109:Core/Src/driver_max7219_basic.c ****     }
+ 110:Core/Src/driver_max7219_basic.c ****     
+ 111:Core/Src/driver_max7219_basic.c ****     /* max7219 set default scan limit */
+ 112:Core/Src/driver_max7219_basic.c ****     res = max7219_set_scan_limit(&gs_handle, MAX7219_BASIC_DEFAULT_SCAN_LIMIT);
+ 133              		.loc 1 112 5 is_stmt 1 view .LVU33
+ 134              		.loc 1 112 11 is_stmt 0 view .LVU34
+ 135 0058 0721     		movs	r1, #7
+ 136 005a 1848     		ldr	r0, .L14
+ 137              	.LVL10:
+ 138              		.loc 1 112 11 view .LVU35
+ 139 005c FFF7FEFF 		bl	max7219_set_scan_limit
+ 140              	.LVL11:
+ 113:Core/Src/driver_max7219_basic.c ****     if (res != 0)
+ 141              		.loc 1 113 5 is_stmt 1 view .LVU36
+ 142              		.loc 1 113 8 is_stmt 0 view .LVU37
+ 143 0060 58B1     		cbz	r0, .L3
+ 114:Core/Src/driver_max7219_basic.c ****     {
+ 115:Core/Src/driver_max7219_basic.c ****         max7219_interface_debug_print("max7219: set scan limit failed.\n");
+ 144              		.loc 1 115 9 is_stmt 1 view .LVU38
+ 145 0062 1D48     		ldr	r0, .L14+28
+ 146              	.LVL12:
+ 147              		.loc 1 115 9 is_stmt 0 view .LVU39
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s 			page 6
+
+
+ 148 0064 FFF7FEFF 		bl	max7219_interface_debug_print
+ 149              	.LVL13:
+ 116:Core/Src/driver_max7219_basic.c ****         (void)max7219_deinit(&gs_handle);
+ 150              		.loc 1 116 9 is_stmt 1 view .LVU40
+ 151              		.loc 1 116 15 is_stmt 0 view .LVU41
+ 152 0068 1448     		ldr	r0, .L14
+ 153 006a FFF7FEFF 		bl	max7219_deinit
+ 154              	.LVL14:
+ 117:Core/Src/driver_max7219_basic.c ****         
+ 118:Core/Src/driver_max7219_basic.c ****         return 1;
+ 155              		.loc 1 118 9 is_stmt 1 view .LVU42
+ 156              		.loc 1 118 16 is_stmt 0 view .LVU43
+ 157 006e 0120     		movs	r0, #1
+ 158 0070 03E0     		b	.L3
+ 159              	.LVL15:
+ 160              	.L9:
+  66:Core/Src/driver_max7219_basic.c ****         
+ 161              		.loc 1 66 9 is_stmt 1 view .LVU44
+ 162 0072 1A48     		ldr	r0, .L14+32
+ 163              	.LVL16:
+  66:Core/Src/driver_max7219_basic.c ****         
+ 164              		.loc 1 66 9 is_stmt 0 view .LVU45
+ 165 0074 FFF7FEFF 		bl	max7219_interface_debug_print
+ 166              	.LVL17:
+  68:Core/Src/driver_max7219_basic.c ****     }
+ 167              		.loc 1 68 9 is_stmt 1 view .LVU46
+  68:Core/Src/driver_max7219_basic.c ****     }
+ 168              		.loc 1 68 16 is_stmt 0 view .LVU47
+ 169 0078 0120     		movs	r0, #1
+ 170              	.LVL18:
+ 171              	.L3:
+ 119:Core/Src/driver_max7219_basic.c ****     }
+ 120:Core/Src/driver_max7219_basic.c ****     
+ 121:Core/Src/driver_max7219_basic.c ****     return 0;
+ 122:Core/Src/driver_max7219_basic.c **** }
+ 172              		.loc 1 122 1 view .LVU48
+ 173 007a 10BD     		pop	{r4, pc}
+ 174              	.LVL19:
+ 175              	.L10:
+  75:Core/Src/driver_max7219_basic.c ****         (void)max7219_deinit(&gs_handle);
+ 176              		.loc 1 75 9 is_stmt 1 view .LVU49
+ 177 007c 1848     		ldr	r0, .L14+36
+ 178              	.LVL20:
+  75:Core/Src/driver_max7219_basic.c ****         (void)max7219_deinit(&gs_handle);
+ 179              		.loc 1 75 9 is_stmt 0 view .LVU50
+ 180 007e FFF7FEFF 		bl	max7219_interface_debug_print
+ 181              	.LVL21:
+  76:Core/Src/driver_max7219_basic.c ****         
+ 182              		.loc 1 76 9 is_stmt 1 view .LVU51
+  76:Core/Src/driver_max7219_basic.c ****         
+ 183              		.loc 1 76 15 is_stmt 0 view .LVU52
+ 184 0082 0E48     		ldr	r0, .L14
+ 185 0084 FFF7FEFF 		bl	max7219_deinit
+ 186              	.LVL22:
+  78:Core/Src/driver_max7219_basic.c ****     }
+ 187              		.loc 1 78 9 is_stmt 1 view .LVU53
+  78:Core/Src/driver_max7219_basic.c ****     }
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s 			page 7
+
+
+ 188              		.loc 1 78 16 is_stmt 0 view .LVU54
+ 189 0088 0120     		movs	r0, #1
+ 190 008a F6E7     		b	.L3
+ 191              	.LVL23:
+ 192              	.L11:
+  85:Core/Src/driver_max7219_basic.c ****         (void)max7219_deinit(&gs_handle);
+ 193              		.loc 1 85 9 is_stmt 1 view .LVU55
+ 194 008c 1548     		ldr	r0, .L14+40
+ 195              	.LVL24:
+  85:Core/Src/driver_max7219_basic.c ****         (void)max7219_deinit(&gs_handle);
+ 196              		.loc 1 85 9 is_stmt 0 view .LVU56
+ 197 008e FFF7FEFF 		bl	max7219_interface_debug_print
+ 198              	.LVL25:
+  86:Core/Src/driver_max7219_basic.c ****         
+ 199              		.loc 1 86 9 is_stmt 1 view .LVU57
+  86:Core/Src/driver_max7219_basic.c ****         
+ 200              		.loc 1 86 15 is_stmt 0 view .LVU58
+ 201 0092 0A48     		ldr	r0, .L14
+ 202 0094 FFF7FEFF 		bl	max7219_deinit
+ 203              	.LVL26:
+  88:Core/Src/driver_max7219_basic.c ****     }
+ 204              		.loc 1 88 9 is_stmt 1 view .LVU59
+  88:Core/Src/driver_max7219_basic.c ****     }
+ 205              		.loc 1 88 16 is_stmt 0 view .LVU60
+ 206 0098 0120     		movs	r0, #1
+ 207 009a EEE7     		b	.L3
+ 208              	.LVL27:
+ 209              	.L12:
+  95:Core/Src/driver_max7219_basic.c ****         (void)max7219_deinit(&gs_handle);
+ 210              		.loc 1 95 9 is_stmt 1 view .LVU61
+ 211 009c 1248     		ldr	r0, .L14+44
+ 212              	.LVL28:
+  95:Core/Src/driver_max7219_basic.c ****         (void)max7219_deinit(&gs_handle);
+ 213              		.loc 1 95 9 is_stmt 0 view .LVU62
+ 214 009e FFF7FEFF 		bl	max7219_interface_debug_print
+ 215              	.LVL29:
+  96:Core/Src/driver_max7219_basic.c ****         
+ 216              		.loc 1 96 9 is_stmt 1 view .LVU63
+  96:Core/Src/driver_max7219_basic.c ****         
+ 217              		.loc 1 96 15 is_stmt 0 view .LVU64
+ 218 00a2 0648     		ldr	r0, .L14
+ 219 00a4 FFF7FEFF 		bl	max7219_deinit
+ 220              	.LVL30:
+  98:Core/Src/driver_max7219_basic.c ****     }
+ 221              		.loc 1 98 9 is_stmt 1 view .LVU65
+  98:Core/Src/driver_max7219_basic.c ****     }
+ 222              		.loc 1 98 16 is_stmt 0 view .LVU66
+ 223 00a8 0120     		movs	r0, #1
+ 224 00aa E6E7     		b	.L3
+ 225              	.LVL31:
+ 226              	.L13:
+ 105:Core/Src/driver_max7219_basic.c ****         (void)max7219_deinit(&gs_handle);
+ 227              		.loc 1 105 9 is_stmt 1 view .LVU67
+ 228 00ac 0F48     		ldr	r0, .L14+48
+ 229              	.LVL32:
+ 105:Core/Src/driver_max7219_basic.c ****         (void)max7219_deinit(&gs_handle);
+ 230              		.loc 1 105 9 is_stmt 0 view .LVU68
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s 			page 8
+
+
+ 231 00ae FFF7FEFF 		bl	max7219_interface_debug_print
+ 232              	.LVL33:
+ 106:Core/Src/driver_max7219_basic.c ****         
+ 233              		.loc 1 106 9 is_stmt 1 view .LVU69
+ 106:Core/Src/driver_max7219_basic.c ****         
+ 234              		.loc 1 106 15 is_stmt 0 view .LVU70
+ 235 00b2 0248     		ldr	r0, .L14
+ 236 00b4 FFF7FEFF 		bl	max7219_deinit
+ 237              	.LVL34:
+ 108:Core/Src/driver_max7219_basic.c ****     }
+ 238              		.loc 1 108 9 is_stmt 1 view .LVU71
+ 108:Core/Src/driver_max7219_basic.c ****     }
+ 239              		.loc 1 108 16 is_stmt 0 view .LVU72
+ 240 00b8 0120     		movs	r0, #1
+ 241 00ba DEE7     		b	.L3
+ 242              	.L15:
+ 243              		.align	2
+ 244              	.L14:
+ 245 00bc 00000000 		.word	gs_handle
+ 246 00c0 00000000 		.word	max7219_interface_spi_init
+ 247 00c4 00000000 		.word	max7219_interface_spi_deinit
+ 248 00c8 00000000 		.word	max7219_interface_spi_write_cmd
+ 249 00cc 00000000 		.word	max7219_interface_spi_write
+ 250 00d0 00000000 		.word	max7219_interface_delay_ms
+ 251 00d4 00000000 		.word	max7219_interface_debug_print
+ 252 00d8 9C000000 		.word	.LC5
+ 253 00dc 00000000 		.word	.LC0
+ 254 00e0 18000000 		.word	.LC1
+ 255 00e4 38000000 		.word	.LC2
+ 256 00e8 54000000 		.word	.LC3
+ 257 00ec 7C000000 		.word	.LC4
+ 258              		.cfi_endproc
+ 259              	.LFE3:
+ 261              		.section	.text.max7219_basic_set_matrix,"ax",%progbits
+ 262              		.align	1
+ 263              		.global	max7219_basic_set_matrix
+ 264              		.syntax unified
+ 265              		.thumb
+ 266              		.thumb_func
+ 268              	max7219_basic_set_matrix:
+ 269              	.LVL35:
+ 270              	.LFB4:
+ 123:Core/Src/driver_max7219_basic.c **** 
+ 124:Core/Src/driver_max7219_basic.c **** /**
+ 125:Core/Src/driver_max7219_basic.c ****  * @brief     basic example set the matrix
+ 126:Core/Src/driver_max7219_basic.c ****  * @param[in] *matrix pointer to a content matrix
+ 127:Core/Src/driver_max7219_basic.c ****  * @return    status code
+ 128:Core/Src/driver_max7219_basic.c ****  *            - 0 success
+ 129:Core/Src/driver_max7219_basic.c ****  *            - 1 set matrix failed
+ 130:Core/Src/driver_max7219_basic.c ****  * @note      none
+ 131:Core/Src/driver_max7219_basic.c ****  */
+ 132:Core/Src/driver_max7219_basic.c **** uint8_t max7219_basic_set_matrix(uint8_t matrix[8])
+ 133:Core/Src/driver_max7219_basic.c **** {
+ 271              		.loc 1 133 1 is_stmt 1 view -0
+ 272              		.cfi_startproc
+ 273              		@ args = 0, pretend = 0, frame = 0
+ 274              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s 			page 9
+
+
+ 275              		.loc 1 133 1 is_stmt 0 view .LVU74
+ 276 0000 08B5     		push	{r3, lr}
+ 277              	.LCFI1:
+ 278              		.cfi_def_cfa_offset 8
+ 279              		.cfi_offset 3, -8
+ 280              		.cfi_offset 14, -4
+ 281 0002 0146     		mov	r1, r0
+ 134:Core/Src/driver_max7219_basic.c ****     /* set matrix */
+ 135:Core/Src/driver_max7219_basic.c ****     if (max7219_set_matrix(&gs_handle, matrix) != 0)
+ 282              		.loc 1 135 5 is_stmt 1 view .LVU75
+ 283              		.loc 1 135 9 is_stmt 0 view .LVU76
+ 284 0004 0248     		ldr	r0, .L19
+ 285              	.LVL36:
+ 286              		.loc 1 135 9 view .LVU77
+ 287 0006 FFF7FEFF 		bl	max7219_set_matrix
+ 288              	.LVL37:
+ 289              		.loc 1 135 8 discriminator 1 view .LVU78
+ 290 000a 00B1     		cbz	r0, .L17
+ 136:Core/Src/driver_max7219_basic.c ****     {
+ 137:Core/Src/driver_max7219_basic.c ****         return 1;
+ 291              		.loc 1 137 16 view .LVU79
+ 292 000c 0120     		movs	r0, #1
+ 293              	.L17:
+ 138:Core/Src/driver_max7219_basic.c ****     }
+ 139:Core/Src/driver_max7219_basic.c ****     else
+ 140:Core/Src/driver_max7219_basic.c ****     {
+ 141:Core/Src/driver_max7219_basic.c ****         return 0;
+ 142:Core/Src/driver_max7219_basic.c ****     }
+ 143:Core/Src/driver_max7219_basic.c **** }
+ 294              		.loc 1 143 1 view .LVU80
+ 295 000e 08BD     		pop	{r3, pc}
+ 296              	.L20:
+ 297              		.align	2
+ 298              	.L19:
+ 299 0010 00000000 		.word	gs_handle
+ 300              		.cfi_endproc
+ 301              	.LFE4:
+ 303              		.section	.text.max7219_basic_set_display,"ax",%progbits
+ 304              		.align	1
+ 305              		.global	max7219_basic_set_display
+ 306              		.syntax unified
+ 307              		.thumb
+ 308              		.thumb_func
+ 310              	max7219_basic_set_display:
+ 311              	.LVL38:
+ 312              	.LFB5:
+ 144:Core/Src/driver_max7219_basic.c **** 
+ 145:Core/Src/driver_max7219_basic.c **** /**
+ 146:Core/Src/driver_max7219_basic.c ****  * @brief     basic example set the display
+ 147:Core/Src/driver_max7219_basic.c ****  * @param[in] digital set part
+ 148:Core/Src/driver_max7219_basic.c ****  * @param[in] data set data
+ 149:Core/Src/driver_max7219_basic.c ****  * @return    status code
+ 150:Core/Src/driver_max7219_basic.c ****  *            - 0 success
+ 151:Core/Src/driver_max7219_basic.c ****  *            - 1 set display failed
+ 152:Core/Src/driver_max7219_basic.c ****  * @note      none
+ 153:Core/Src/driver_max7219_basic.c ****  */
+ 154:Core/Src/driver_max7219_basic.c **** uint8_t max7219_basic_set_display(max7219_digital_t digital, uint8_t data)
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s 			page 10
+
+
+ 155:Core/Src/driver_max7219_basic.c **** {
+ 313              		.loc 1 155 1 is_stmt 1 view -0
+ 314              		.cfi_startproc
+ 315              		@ args = 0, pretend = 0, frame = 0
+ 316              		@ frame_needed = 0, uses_anonymous_args = 0
+ 317              		.loc 1 155 1 is_stmt 0 view .LVU82
+ 318 0000 08B5     		push	{r3, lr}
+ 319              	.LCFI2:
+ 320              		.cfi_def_cfa_offset 8
+ 321              		.cfi_offset 3, -8
+ 322              		.cfi_offset 14, -4
+ 323 0002 0A46     		mov	r2, r1
+ 156:Core/Src/driver_max7219_basic.c ****     /* set display */
+ 157:Core/Src/driver_max7219_basic.c ****     if (max7219_set_display(&gs_handle, digital, data) != 0)
+ 324              		.loc 1 157 5 is_stmt 1 view .LVU83
+ 325              		.loc 1 157 9 is_stmt 0 view .LVU84
+ 326 0004 0146     		mov	r1, r0
+ 327              	.LVL39:
+ 328              		.loc 1 157 9 view .LVU85
+ 329 0006 0348     		ldr	r0, .L24
+ 330              	.LVL40:
+ 331              		.loc 1 157 9 view .LVU86
+ 332 0008 FFF7FEFF 		bl	max7219_set_display
+ 333              	.LVL41:
+ 334              		.loc 1 157 8 discriminator 1 view .LVU87
+ 335 000c 00B1     		cbz	r0, .L22
+ 158:Core/Src/driver_max7219_basic.c ****     {
+ 159:Core/Src/driver_max7219_basic.c ****         return 1;
+ 336              		.loc 1 159 16 view .LVU88
+ 337 000e 0120     		movs	r0, #1
+ 338              	.L22:
+ 160:Core/Src/driver_max7219_basic.c ****     }
+ 161:Core/Src/driver_max7219_basic.c ****     else
+ 162:Core/Src/driver_max7219_basic.c ****     {
+ 163:Core/Src/driver_max7219_basic.c ****         return 0;
+ 164:Core/Src/driver_max7219_basic.c ****     }
+ 165:Core/Src/driver_max7219_basic.c **** }
+ 339              		.loc 1 165 1 view .LVU89
+ 340 0010 08BD     		pop	{r3, pc}
+ 341              	.L25:
+ 342 0012 00BF     		.align	2
+ 343              	.L24:
+ 344 0014 00000000 		.word	gs_handle
+ 345              		.cfi_endproc
+ 346              	.LFE5:
+ 348              		.section	.text.max7219_basic_deinit,"ax",%progbits
+ 349              		.align	1
+ 350              		.global	max7219_basic_deinit
+ 351              		.syntax unified
+ 352              		.thumb
+ 353              		.thumb_func
+ 355              	max7219_basic_deinit:
+ 356              	.LFB6:
+ 166:Core/Src/driver_max7219_basic.c **** 
+ 167:Core/Src/driver_max7219_basic.c **** /**
+ 168:Core/Src/driver_max7219_basic.c ****  * @brief  basic example deinit
+ 169:Core/Src/driver_max7219_basic.c ****  * @return status code
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s 			page 11
+
+
+ 170:Core/Src/driver_max7219_basic.c ****  *         - 0 success
+ 171:Core/Src/driver_max7219_basic.c ****  *         - 1 deinit failed
+ 172:Core/Src/driver_max7219_basic.c ****  * @note   none
+ 173:Core/Src/driver_max7219_basic.c ****  */
+ 174:Core/Src/driver_max7219_basic.c **** uint8_t max7219_basic_deinit(void)
+ 175:Core/Src/driver_max7219_basic.c **** {
+ 357              		.loc 1 175 1 is_stmt 1 view -0
+ 358              		.cfi_startproc
+ 359              		@ args = 0, pretend = 0, frame = 0
+ 360              		@ frame_needed = 0, uses_anonymous_args = 0
+ 361 0000 08B5     		push	{r3, lr}
+ 362              	.LCFI3:
+ 363              		.cfi_def_cfa_offset 8
+ 364              		.cfi_offset 3, -8
+ 365              		.cfi_offset 14, -4
+ 176:Core/Src/driver_max7219_basic.c ****     /* close max7219 */
+ 177:Core/Src/driver_max7219_basic.c ****     if (max7219_deinit(&gs_handle) != 0)
+ 366              		.loc 1 177 5 view .LVU91
+ 367              		.loc 1 177 9 is_stmt 0 view .LVU92
+ 368 0002 0348     		ldr	r0, .L29
+ 369 0004 FFF7FEFF 		bl	max7219_deinit
+ 370              	.LVL42:
+ 371              		.loc 1 177 8 discriminator 1 view .LVU93
+ 372 0008 00B1     		cbz	r0, .L27
+ 178:Core/Src/driver_max7219_basic.c ****     {
+ 179:Core/Src/driver_max7219_basic.c ****         return 1;
+ 373              		.loc 1 179 16 view .LVU94
+ 374 000a 0120     		movs	r0, #1
+ 375              	.L27:
+ 180:Core/Src/driver_max7219_basic.c ****     }
+ 181:Core/Src/driver_max7219_basic.c ****     else
+ 182:Core/Src/driver_max7219_basic.c ****     {
+ 183:Core/Src/driver_max7219_basic.c ****         return 0;
+ 184:Core/Src/driver_max7219_basic.c ****     }
+ 185:Core/Src/driver_max7219_basic.c **** }
+ 376              		.loc 1 185 1 view .LVU95
+ 377 000c 08BD     		pop	{r3, pc}
+ 378              	.L30:
+ 379 000e 00BF     		.align	2
+ 380              	.L29:
+ 381 0010 00000000 		.word	gs_handle
+ 382              		.cfi_endproc
+ 383              	.LFE6:
+ 385              		.section	.bss.gs_handle,"aw",%nobits
+ 386              		.align	2
+ 389              	gs_handle:
+ 390 0000 00000000 		.space	284
+ 390      00000000 
+ 390      00000000 
+ 390      00000000 
+ 390      00000000 
+ 391              		.text
+ 392              	.Letext0:
+ 393              		.file 2 "/Applications/ArmGNUToolchain/15.3.rel1/arm-none-eabi/arm-none-eabi/include/machine/_defa
+ 394              		.file 3 "/Applications/ArmGNUToolchain/15.3.rel1/arm-none-eabi/arm-none-eabi/include/sys/_stdint.h
+ 395              		.file 4 "Core/Inc/driver_max7219.h"
+ 396              		.file 5 "Core/Inc/driver_max7219_interface.h"
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s 			page 12
+
+
+ 397              		.file 6 "/Applications/ArmGNUToolchain/15.3.rel1/arm-none-eabi/arm-none-eabi/include/string.h"
+ 398              		.file 7 "<built-in>"
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s 			page 13
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 driver_max7219_basic.c
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s:19     .rodata.max7219_basic_init.str1.4:00000000 $d
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s:38     .text.max7219_basic_init:00000000 $t
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s:44     .text.max7219_basic_init:00000000 max7219_basic_init
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s:245    .text.max7219_basic_init:000000bc $d
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s:389    .bss.gs_handle:00000000 gs_handle
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s:262    .text.max7219_basic_set_matrix:00000000 $t
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s:268    .text.max7219_basic_set_matrix:00000000 max7219_basic_set_matrix
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s:299    .text.max7219_basic_set_matrix:00000010 $d
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s:304    .text.max7219_basic_set_display:00000000 $t
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s:310    .text.max7219_basic_set_display:00000000 max7219_basic_set_display
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s:344    .text.max7219_basic_set_display:00000014 $d
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s:349    .text.max7219_basic_deinit:00000000 $t
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s:355    .text.max7219_basic_deinit:00000000 max7219_basic_deinit
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s:381    .text.max7219_basic_deinit:00000010 $d
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//ccVgL2hQ.s:386    .bss.gs_handle:00000000 $d
+
+UNDEFINED SYMBOLS
+memset
+max7219_init
+max7219_set_decode
+max7219_set_mode
+max7219_set_display_test_mode
+max7219_set_intensity
+max7219_set_scan_limit
+max7219_interface_debug_print
+max7219_deinit
+max7219_interface_spi_init
+max7219_interface_spi_deinit
+max7219_interface_spi_write_cmd
+max7219_interface_spi_write
+max7219_interface_delay_ms
+max7219_set_matrix
+max7219_set_display

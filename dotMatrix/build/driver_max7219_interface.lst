@@ -1,0 +1,460 @@
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc5c9jff.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"driver_max7219_interface.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.file 1 "Core/Src/driver_max7219_interface.c"
+  18              		.section	.text.max7219_interface_spi_init,"ax",%progbits
+  19              		.align	1
+  20              		.global	max7219_interface_spi_init
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  25              	max7219_interface_spi_init:
+  26              	.LFB70:
+   1:Core/Src/driver_max7219_interface.c **** /* Core/Src/MAX7219/max7219_interface.c */
+   2:Core/Src/driver_max7219_interface.c **** #include "driver_max7219_interface.h"
+   3:Core/Src/driver_max7219_interface.c **** #include "main.h"                 // CubeMX 自动生成，包含 hspi1 / huart1 句柄
+   4:Core/Src/driver_max7219_interface.c **** #include <stdarg.h>
+   5:Core/Src/driver_max7219_interface.c **** 
+   6:Core/Src/driver_max7219_interface.c **** extern SPI_HandleTypeDef hspi1;   // 也可以直接 #include "spi.h"
+   7:Core/Src/driver_max7219_interface.c **** 
+   8:Core/Src/driver_max7219_interface.c **** #define MAX7219_CS_PORT  MAX7219_CS_GPIO_Port    // CubeMX 起 User Label 后自动生成
+   9:Core/Src/driver_max7219_interface.c **** #define MAX7219_CS_PIN   MAX7219_CS_Pin          //   main.h 里会出现这两个宏
+  10:Core/Src/driver_max7219_interface.c **** 
+  11:Core/Src/driver_max7219_interface.c **** static inline void cs_low (void) { HAL_GPIO_WritePin(MAX7219_CS_PORT, MAX7219_CS_PIN, GPIO_PIN_RESE
+  12:Core/Src/driver_max7219_interface.c **** static inline void cs_high(void) { HAL_GPIO_WritePin(MAX7219_CS_PORT, MAX7219_CS_PIN, GPIO_PIN_SET)
+  13:Core/Src/driver_max7219_interface.c **** 
+  14:Core/Src/driver_max7219_interface.c **** uint8_t max7219_interface_spi_init(void)
+  15:Core/Src/driver_max7219_interface.c **** {
+  27              		.loc 1 15 1 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  16:Core/Src/driver_max7219_interface.c ****     /* CubeMX 已自动初始化 hspi1，这里没额外事做 */
+  17:Core/Src/driver_max7219_interface.c ****     return 0;
+  32              		.loc 1 17 5 view .LVU1
+  18:Core/Src/driver_max7219_interface.c **** }
+  33              		.loc 1 18 1 is_stmt 0 view .LVU2
+  34 0000 0020     		movs	r0, #0
+  35 0002 7047     		bx	lr
+  36              		.cfi_endproc
+  37              	.LFE70:
+  39              		.section	.text.max7219_interface_spi_deinit,"ax",%progbits
+  40              		.align	1
+  41              		.global	max7219_interface_spi_deinit
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc5c9jff.s 			page 2
+
+
+  42              		.syntax unified
+  43              		.thumb
+  44              		.thumb_func
+  46              	max7219_interface_spi_deinit:
+  47              	.LFB71:
+  19:Core/Src/driver_max7219_interface.c **** 
+  20:Core/Src/driver_max7219_interface.c **** uint8_t max7219_interface_spi_deinit(void)
+  21:Core/Src/driver_max7219_interface.c **** {
+  48              		.loc 1 21 1 is_stmt 1 view -0
+  49              		.cfi_startproc
+  50              		@ args = 0, pretend = 0, frame = 0
+  51              		@ frame_needed = 0, uses_anonymous_args = 0
+  52 0000 08B5     		push	{r3, lr}
+  53              	.LCFI0:
+  54              		.cfi_def_cfa_offset 8
+  55              		.cfi_offset 3, -8
+  56              		.cfi_offset 14, -4
+  22:Core/Src/driver_max7219_interface.c ****     return (HAL_SPI_DeInit(&hspi1) == HAL_OK) ? 0 : 1;
+  57              		.loc 1 22 5 view .LVU4
+  58              		.loc 1 22 13 is_stmt 0 view .LVU5
+  59 0002 0348     		ldr	r0, .L4
+  60 0004 FFF7FEFF 		bl	HAL_SPI_DeInit
+  61              	.LVL0:
+  23:Core/Src/driver_max7219_interface.c **** }
+  62              		.loc 1 23 1 view .LVU6
+  63 0008 0038     		subs	r0, r0, #0
+  64 000a 18BF     		it	ne
+  65 000c 0120     		movne	r0, #1
+  66 000e 08BD     		pop	{r3, pc}
+  67              	.L5:
+  68              		.align	2
+  69              	.L4:
+  70 0010 00000000 		.word	hspi1
+  71              		.cfi_endproc
+  72              	.LFE71:
+  74              		.section	.text.max7219_interface_spi_write_cmd,"ax",%progbits
+  75              		.align	1
+  76              		.global	max7219_interface_spi_write_cmd
+  77              		.syntax unified
+  78              		.thumb
+  79              		.thumb_func
+  81              	max7219_interface_spi_write_cmd:
+  82              	.LVL1:
+  83              	.LFB72:
+  24:Core/Src/driver_max7219_interface.c **** 
+  25:Core/Src/driver_max7219_interface.c **** /* libdriver 把所有 16-bit 命令都当成"写命令" */
+  26:Core/Src/driver_max7219_interface.c **** uint8_t max7219_interface_spi_write_cmd(uint8_t *buf, uint16_t len)
+  27:Core/Src/driver_max7219_interface.c **** {
+  84              		.loc 1 27 1 is_stmt 1 view -0
+  85              		.cfi_startproc
+  86              		@ args = 0, pretend = 0, frame = 0
+  87              		@ frame_needed = 0, uses_anonymous_args = 0
+  88              		.loc 1 27 1 is_stmt 0 view .LVU8
+  89 0000 70B5     		push	{r4, r5, r6, lr}
+  90              	.LCFI1:
+  91              		.cfi_def_cfa_offset 16
+  92              		.cfi_offset 4, -16
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc5c9jff.s 			page 3
+
+
+  93              		.cfi_offset 5, -12
+  94              		.cfi_offset 6, -8
+  95              		.cfi_offset 14, -4
+  96 0002 0646     		mov	r6, r0
+  97 0004 0D46     		mov	r5, r1
+  28:Core/Src/driver_max7219_interface.c ****     cs_low();
+  98              		.loc 1 28 5 is_stmt 1 view .LVU9
+  99              	.LBB10:
+ 100              	.LBI10:
+  11:Core/Src/driver_max7219_interface.c **** static inline void cs_high(void) { HAL_GPIO_WritePin(MAX7219_CS_PORT, MAX7219_CS_PIN, GPIO_PIN_SET)
+ 101              		.loc 1 11 20 view .LVU10
+ 102              	.LBB11:
+  11:Core/Src/driver_max7219_interface.c **** static inline void cs_high(void) { HAL_GPIO_WritePin(MAX7219_CS_PORT, MAX7219_CS_PIN, GPIO_PIN_SET)
+ 103              		.loc 1 11 36 view .LVU11
+ 104 0006 0B4C     		ldr	r4, .L8
+ 105 0008 0022     		movs	r2, #0
+ 106 000a 1021     		movs	r1, #16
+ 107              	.LVL2:
+  11:Core/Src/driver_max7219_interface.c **** static inline void cs_high(void) { HAL_GPIO_WritePin(MAX7219_CS_PORT, MAX7219_CS_PIN, GPIO_PIN_SET)
+ 108              		.loc 1 11 36 is_stmt 0 view .LVU12
+ 109 000c 2046     		mov	r0, r4
+ 110              	.LVL3:
+  11:Core/Src/driver_max7219_interface.c **** static inline void cs_high(void) { HAL_GPIO_WritePin(MAX7219_CS_PORT, MAX7219_CS_PIN, GPIO_PIN_SET)
+ 111              		.loc 1 11 36 view .LVU13
+ 112 000e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 113              	.LVL4:
+ 114              	.LBE11:
+ 115              	.LBE10:
+  29:Core/Src/driver_max7219_interface.c ****     HAL_StatusTypeDef s = HAL_SPI_Transmit(&hspi1, buf, len, HAL_MAX_DELAY);
+ 116              		.loc 1 29 5 is_stmt 1 view .LVU14
+ 117              		.loc 1 29 27 is_stmt 0 view .LVU15
+ 118 0012 4FF0FF33 		mov	r3, #-1
+ 119 0016 2A46     		mov	r2, r5
+ 120 0018 3146     		mov	r1, r6
+ 121 001a 0748     		ldr	r0, .L8+4
+ 122 001c FFF7FEFF 		bl	HAL_SPI_Transmit
+ 123              	.LVL5:
+ 124 0020 0546     		mov	r5, r0
+ 125              	.LVL6:
+  30:Core/Src/driver_max7219_interface.c ****     cs_high();
+ 126              		.loc 1 30 5 is_stmt 1 view .LVU16
+ 127              	.LBB12:
+ 128              	.LBI12:
+  12:Core/Src/driver_max7219_interface.c **** 
+ 129              		.loc 1 12 20 view .LVU17
+ 130              	.LBB13:
+  12:Core/Src/driver_max7219_interface.c **** 
+ 131              		.loc 1 12 36 view .LVU18
+ 132 0022 0122     		movs	r2, #1
+ 133 0024 1021     		movs	r1, #16
+ 134 0026 2046     		mov	r0, r4
+ 135 0028 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 136              	.LVL7:
+ 137              	.LBE13:
+ 138              	.LBE12:
+  31:Core/Src/driver_max7219_interface.c ****     return (s == HAL_OK) ? 0 : 1;
+ 139              		.loc 1 31 5 view .LVU19
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc5c9jff.s 			page 4
+
+
+  32:Core/Src/driver_max7219_interface.c **** }
+ 140              		.loc 1 32 1 is_stmt 0 view .LVU20
+ 141 002c 281E     		subs	r0, r5, #0
+ 142 002e 18BF     		it	ne
+ 143 0030 0120     		movne	r0, #1
+ 144 0032 70BD     		pop	{r4, r5, r6, pc}
+ 145              	.LVL8:
+ 146              	.L9:
+ 147              		.loc 1 32 1 view .LVU21
+ 148              		.align	2
+ 149              	.L8:
+ 150 0034 00080140 		.word	1073809408
+ 151 0038 00000000 		.word	hspi1
+ 152              		.cfi_endproc
+ 153              	.LFE72:
+ 155              		.section	.text.max7219_interface_spi_write,"ax",%progbits
+ 156              		.align	1
+ 157              		.global	max7219_interface_spi_write
+ 158              		.syntax unified
+ 159              		.thumb
+ 160              		.thumb_func
+ 162              	max7219_interface_spi_write:
+ 163              	.LVL9:
+ 164              	.LFB73:
+  33:Core/Src/driver_max7219_interface.c **** 
+  34:Core/Src/driver_max7219_interface.c **** /* reg + 1 字节数据，组合成 2 字节帧发出去（MAX7219 协议一次传 16 bit） */
+  35:Core/Src/driver_max7219_interface.c **** uint8_t max7219_interface_spi_write(uint8_t reg, uint8_t *buf, uint16_t len)
+  36:Core/Src/driver_max7219_interface.c **** {
+ 165              		.loc 1 36 1 is_stmt 1 view -0
+ 166              		.cfi_startproc
+ 167              		@ args = 0, pretend = 0, frame = 8
+ 168              		@ frame_needed = 0, uses_anonymous_args = 0
+ 169              		.loc 1 36 1 is_stmt 0 view .LVU23
+ 170 0000 30B5     		push	{r4, r5, lr}
+ 171              	.LCFI2:
+ 172              		.cfi_def_cfa_offset 12
+ 173              		.cfi_offset 4, -12
+ 174              		.cfi_offset 5, -8
+ 175              		.cfi_offset 14, -4
+ 176 0002 83B0     		sub	sp, sp, #12
+ 177              	.LCFI3:
+ 178              		.cfi_def_cfa_offset 24
+  37:Core/Src/driver_max7219_interface.c ****     uint8_t tx[2] = { (uint8_t)(reg & 0x0F), buf[0] };
+ 179              		.loc 1 37 5 is_stmt 1 view .LVU24
+ 180              		.loc 1 37 23 is_stmt 0 view .LVU25
+ 181 0004 00F00F00 		and	r0, r0, #15
+ 182              	.LVL10:
+ 183              		.loc 1 37 13 view .LVU26
+ 184 0008 8DF80400 		strb	r0, [sp, #4]
+ 185              		.loc 1 37 49 view .LVU27
+ 186 000c 0B78     		ldrb	r3, [r1]	@ zero_extendqisi2
+ 187              		.loc 1 37 13 view .LVU28
+ 188 000e 8DF80530 		strb	r3, [sp, #5]
+  38:Core/Src/driver_max7219_interface.c ****     cs_low();
+ 189              		.loc 1 38 5 is_stmt 1 view .LVU29
+ 190              	.LBB14:
+ 191              	.LBI14:
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc5c9jff.s 			page 5
+
+
+  11:Core/Src/driver_max7219_interface.c **** static inline void cs_high(void) { HAL_GPIO_WritePin(MAX7219_CS_PORT, MAX7219_CS_PIN, GPIO_PIN_SET)
+ 192              		.loc 1 11 20 view .LVU30
+ 193              	.LBB15:
+  11:Core/Src/driver_max7219_interface.c **** static inline void cs_high(void) { HAL_GPIO_WritePin(MAX7219_CS_PORT, MAX7219_CS_PIN, GPIO_PIN_SET)
+ 194              		.loc 1 11 36 view .LVU31
+ 195 0012 0C4C     		ldr	r4, .L12
+ 196 0014 0022     		movs	r2, #0
+ 197              	.LVL11:
+  11:Core/Src/driver_max7219_interface.c **** static inline void cs_high(void) { HAL_GPIO_WritePin(MAX7219_CS_PORT, MAX7219_CS_PIN, GPIO_PIN_SET)
+ 198              		.loc 1 11 36 is_stmt 0 view .LVU32
+ 199 0016 1021     		movs	r1, #16
+ 200              	.LVL12:
+  11:Core/Src/driver_max7219_interface.c **** static inline void cs_high(void) { HAL_GPIO_WritePin(MAX7219_CS_PORT, MAX7219_CS_PIN, GPIO_PIN_SET)
+ 201              		.loc 1 11 36 view .LVU33
+ 202 0018 2046     		mov	r0, r4
+ 203 001a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 204              	.LVL13:
+ 205              	.LBE15:
+ 206              	.LBE14:
+  39:Core/Src/driver_max7219_interface.c ****     HAL_StatusTypeDef s = HAL_SPI_Transmit(&hspi1, tx, 2, HAL_MAX_DELAY);
+ 207              		.loc 1 39 5 is_stmt 1 view .LVU34
+ 208              		.loc 1 39 27 is_stmt 0 view .LVU35
+ 209 001e 4FF0FF33 		mov	r3, #-1
+ 210 0022 0222     		movs	r2, #2
+ 211 0024 01A9     		add	r1, sp, #4
+ 212 0026 0848     		ldr	r0, .L12+4
+ 213 0028 FFF7FEFF 		bl	HAL_SPI_Transmit
+ 214              	.LVL14:
+ 215 002c 0546     		mov	r5, r0
+ 216              	.LVL15:
+  40:Core/Src/driver_max7219_interface.c ****     cs_high();
+ 217              		.loc 1 40 5 is_stmt 1 view .LVU36
+ 218              	.LBB16:
+ 219              	.LBI16:
+  12:Core/Src/driver_max7219_interface.c **** 
+ 220              		.loc 1 12 20 view .LVU37
+ 221              	.LBB17:
+  12:Core/Src/driver_max7219_interface.c **** 
+ 222              		.loc 1 12 36 view .LVU38
+ 223 002e 0122     		movs	r2, #1
+ 224 0030 1021     		movs	r1, #16
+ 225 0032 2046     		mov	r0, r4
+ 226 0034 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 227              	.LVL16:
+ 228              	.LBE17:
+ 229              	.LBE16:
+  41:Core/Src/driver_max7219_interface.c ****     return (s == HAL_OK) ? 0 : 1;
+ 230              		.loc 1 41 5 view .LVU39
+  42:Core/Src/driver_max7219_interface.c **** }
+ 231              		.loc 1 42 1 is_stmt 0 view .LVU40
+ 232 0038 281E     		subs	r0, r5, #0
+ 233 003a 18BF     		it	ne
+ 234 003c 0120     		movne	r0, #1
+ 235 003e 03B0     		add	sp, sp, #12
+ 236              	.LCFI4:
+ 237              		.cfi_def_cfa_offset 12
+ 238              		@ sp needed
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc5c9jff.s 			page 6
+
+
+ 239 0040 30BD     		pop	{r4, r5, pc}
+ 240              	.LVL17:
+ 241              	.L13:
+ 242              		.loc 1 42 1 view .LVU41
+ 243 0042 00BF     		.align	2
+ 244              	.L12:
+ 245 0044 00080140 		.word	1073809408
+ 246 0048 00000000 		.word	hspi1
+ 247              		.cfi_endproc
+ 248              	.LFE73:
+ 250              		.section	.text.max7219_interface_delay_ms,"ax",%progbits
+ 251              		.align	1
+ 252              		.global	max7219_interface_delay_ms
+ 253              		.syntax unified
+ 254              		.thumb
+ 255              		.thumb_func
+ 257              	max7219_interface_delay_ms:
+ 258              	.LVL18:
+ 259              	.LFB74:
+  43:Core/Src/driver_max7219_interface.c **** 
+  44:Core/Src/driver_max7219_interface.c **** void max7219_interface_delay_ms(uint32_t ms)
+  45:Core/Src/driver_max7219_interface.c **** {
+ 260              		.loc 1 45 1 is_stmt 1 view -0
+ 261              		.cfi_startproc
+ 262              		@ args = 0, pretend = 0, frame = 0
+ 263              		@ frame_needed = 0, uses_anonymous_args = 0
+ 264              		.loc 1 45 1 is_stmt 0 view .LVU43
+ 265 0000 08B5     		push	{r3, lr}
+ 266              	.LCFI5:
+ 267              		.cfi_def_cfa_offset 8
+ 268              		.cfi_offset 3, -8
+ 269              		.cfi_offset 14, -4
+  46:Core/Src/driver_max7219_interface.c ****     HAL_Delay(ms);
+ 270              		.loc 1 46 5 is_stmt 1 view .LVU44
+ 271 0002 FFF7FEFF 		bl	HAL_Delay
+ 272              	.LVL19:
+  47:Core/Src/driver_max7219_interface.c **** }
+ 273              		.loc 1 47 1 is_stmt 0 view .LVU45
+ 274 0006 08BD     		pop	{r3, pc}
+ 275              		.cfi_endproc
+ 276              	.LFE74:
+ 278              		.section	.text.max7219_interface_debug_print,"ax",%progbits
+ 279              		.align	1
+ 280              		.global	max7219_interface_debug_print
+ 281              		.syntax unified
+ 282              		.thumb
+ 283              		.thumb_func
+ 285              	max7219_interface_debug_print:
+ 286              	.LVL20:
+ 287              	.LFB75:
+  48:Core/Src/driver_max7219_interface.c **** 
+  49:Core/Src/driver_max7219_interface.c **** void max7219_interface_debug_print(const char *const fmt, ...)
+  50:Core/Src/driver_max7219_interface.c **** {
+ 288              		.loc 1 50 1 is_stmt 1 view -0
+ 289              		.cfi_startproc
+ 290              		@ args = 4, pretend = 16, frame = 136
+ 291              		@ frame_needed = 0, uses_anonymous_args = 1
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc5c9jff.s 			page 7
+
+
+ 292              		.loc 1 50 1 is_stmt 0 view .LVU47
+ 293 0000 0FB4     		push	{r0, r1, r2, r3}
+ 294              	.LCFI6:
+ 295              		.cfi_def_cfa_offset 16
+ 296              		.cfi_offset 0, -16
+ 297              		.cfi_offset 1, -12
+ 298              		.cfi_offset 2, -8
+ 299              		.cfi_offset 3, -4
+ 300 0002 00B5     		push	{lr}
+ 301              	.LCFI7:
+ 302              		.cfi_def_cfa_offset 20
+ 303              		.cfi_offset 14, -20
+ 304 0004 A3B0     		sub	sp, sp, #140
+ 305              	.LCFI8:
+ 306              		.cfi_def_cfa_offset 160
+ 307 0006 24AB     		add	r3, sp, #144
+ 308 0008 53F8042B 		ldr	r2, [r3], #4
+  51:Core/Src/driver_max7219_interface.c ****     char str[128];
+ 309              		.loc 1 51 5 is_stmt 1 view .LVU48
+  52:Core/Src/driver_max7219_interface.c ****     va_list ap;
+ 310              		.loc 1 52 5 view .LVU49
+  53:Core/Src/driver_max7219_interface.c ****     va_start(ap, fmt);
+ 311              		.loc 1 53 5 view .LVU50
+ 312 000c 0193     		str	r3, [sp, #4]
+  54:Core/Src/driver_max7219_interface.c ****     int n = vsnprintf(str, sizeof(str), fmt, ap);
+ 313              		.loc 1 54 5 view .LVU51
+ 314              		.loc 1 54 13 is_stmt 0 view .LVU52
+ 315 000e 8021     		movs	r1, #128
+ 316 0010 02A8     		add	r0, sp, #8
+ 317 0012 FFF7FEFF 		bl	vsnprintf
+ 318              	.LVL21:
+  55:Core/Src/driver_max7219_interface.c ****     va_end(ap);
+ 319              		.loc 1 55 5 is_stmt 1 view .LVU53
+  56:Core/Src/driver_max7219_interface.c **** }...
+ 320              		.loc 1 56 1 is_stmt 0 view .LVU54
+ 321 0016 23B0     		add	sp, sp, #140
+ 322              	.LCFI9:
+ 323              		.cfi_def_cfa_offset 20
+ 324              		@ sp needed
+ 325 0018 5DF804EB 		ldr	lr, [sp], #4
+ 326              	.LCFI10:
+ 327              		.cfi_restore 14
+ 328              		.cfi_def_cfa_offset 16
+ 329 001c 04B0     		add	sp, sp, #16
+ 330              	.LCFI11:
+ 331              		.cfi_restore 3
+ 332              		.cfi_restore 2
+ 333              		.cfi_restore 1
+ 334              		.cfi_restore 0
+ 335              		.cfi_def_cfa_offset 0
+ 336 001e 7047     		bx	lr
+ 337              		.cfi_endproc
+ 338              	.LFE75:
+ 340              		.text
+ 341              	.Letext0:
+ 342              		.file 2 "/Applications/ArmGNUToolchain/15.3.rel1/arm-none-eabi/arm-none-eabi/include/machine/_defa
+ 343              		.file 3 "/Applications/ArmGNUToolchain/15.3.rel1/arm-none-eabi/lib/gcc/arm-none-eabi/15.3.1/includ
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc5c9jff.s 			page 8
+
+
+ 344              		.file 4 "/Applications/ArmGNUToolchain/15.3.rel1/arm-none-eabi/arm-none-eabi/include/stdio.h"
+ 345              		.file 5 "/Applications/ArmGNUToolchain/15.3.rel1/arm-none-eabi/arm-none-eabi/include/sys/_stdint.h
+ 346              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f102xb.h"
+ 347              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 348              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 349              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 350              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h"
+ 351              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 352              		.file 12 "<built-in>"
+ARM GAS  /var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc5c9jff.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 driver_max7219_interface.c
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc5c9jff.s:19     .text.max7219_interface_spi_init:00000000 $t
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc5c9jff.s:25     .text.max7219_interface_spi_init:00000000 max7219_interface_spi_init
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc5c9jff.s:40     .text.max7219_interface_spi_deinit:00000000 $t
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc5c9jff.s:46     .text.max7219_interface_spi_deinit:00000000 max7219_interface_spi_deinit
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc5c9jff.s:70     .text.max7219_interface_spi_deinit:00000010 $d
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc5c9jff.s:75     .text.max7219_interface_spi_write_cmd:00000000 $t
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc5c9jff.s:81     .text.max7219_interface_spi_write_cmd:00000000 max7219_interface_spi_write_cmd
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc5c9jff.s:150    .text.max7219_interface_spi_write_cmd:00000034 $d
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc5c9jff.s:156    .text.max7219_interface_spi_write:00000000 $t
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc5c9jff.s:162    .text.max7219_interface_spi_write:00000000 max7219_interface_spi_write
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc5c9jff.s:245    .text.max7219_interface_spi_write:00000044 $d
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc5c9jff.s:251    .text.max7219_interface_delay_ms:00000000 $t
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc5c9jff.s:257    .text.max7219_interface_delay_ms:00000000 max7219_interface_delay_ms
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc5c9jff.s:279    .text.max7219_interface_debug_print:00000000 $t
+/var/folders/y0/yl1wrqfd209ghqq3s8k8qc1m0000gn/T//cc5c9jff.s:285    .text.max7219_interface_debug_print:00000000 max7219_interface_debug_print
+
+UNDEFINED SYMBOLS
+HAL_SPI_DeInit
+hspi1
+HAL_GPIO_WritePin
+HAL_SPI_Transmit
+HAL_Delay
+vsnprintf
